@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="994a28be-1553-4a75-b400-b882d4d6e043" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/JarOfT/Jar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/JarOfT/MainClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GenericArrayCreator/ArrayCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GenericArrayCreator/MainClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1732209531356</updated>
       <workItem from="1732209532515" duration="52000" />
-      <workItem from="1739020316540" duration="525000" />
+      <workItem from="1739020316540" duration="1354000" />
     </task>
     <servers />
   </component>
@@ -97,9 +92,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/JarOfT/MainClass.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/src/GenericArrayCreator/MainClass.java</url>
+          <line>7</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
