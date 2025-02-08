@@ -1,4 +1,4 @@
-package CustomList;
+package CustomListSorter;
 
 import java.util.Scanner;
 
@@ -22,7 +22,6 @@ public class MainClass {
                 case "Greater" -> System.out.println(list.countGreaterThan(data[1]));
                 case "Max" -> System.out.println(list.getMax());
                 case "Min" -> System.out.println(list.getMin());
-                case "Sort" -> Sorter.sort(list);
                 case "Print" -> System.out.println(list);
             }
             input = sc.nextLine();
