@@ -9,15 +9,15 @@ public class MainClass {
         Scanner sc = new Scanner(System.in);
         int n = Integer.parseInt(sc.nextLine());
 
-        List<String> boxes = new ArrayList<>();
+        List<String> strings = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             String element = sc.nextLine();
-            boxes.add(element);
+            strings.add(element);
         }
 
         String elementToCheck = sc.nextLine();
 
-        int count = getCount(boxes, elementToCheck);
+        int count = getCount(strings, elementToCheck);
         System.out.println(count);
     }
 
