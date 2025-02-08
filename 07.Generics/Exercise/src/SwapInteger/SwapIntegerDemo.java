@@ -1,6 +1,9 @@
-package GenericBox;
+package SwapInteger;
+
+import GenericBox.Box;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,8 +22,16 @@ public class SwapIntegerDemo {
         int indexOne = sc.nextInt();
         int indexTwo = sc.nextInt();
 
-        Box.swapElements(boxes, indexOne, indexTwo);
+        swapElements(boxes, indexOne, indexTwo);
         boxes.forEach(System.out::println);
 
+    }
+
+    private static <T> void swapElements(List<T> list, int indexOne, int indexTwo) {
+        if (indexOne >= 0 && indexOne < indexTwo && indexTwo < list.size()) {
+            Collections.swap(list, indexOne, indexTwo);
+        } else {
+            throw new IndexOutOfBoundsException("Please enter valid indices");
+        }
     }
 }
