@@ -10,8 +10,15 @@ public class Main {
         System.out.println(smartArray.contains(5));
         System.out.println(smartArray.remove(2));
         System.out.println(smartArray.contains(3));
-        System.out.println(smartArray.contains(5));
-
         System.out.println();
+        System.out.println("FIRST PRINT:");
+        smartArray.forEach(System.out::println);
+        System.out.println();
+        System.out.println("ONLY EVEN NUMBERS:");
+        smartArray.forEach(x -> {
+            if (x % 2 == 0) {
+                System.out.println(x);
+            }
+        });
     }
 }

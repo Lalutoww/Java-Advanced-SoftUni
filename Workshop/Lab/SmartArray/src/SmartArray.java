@@ -1,3 +1,5 @@
+import java.util.function.Consumer;
+
 public class SmartArray {
     /**
      * Default initial capacity.
@@ -108,6 +110,12 @@ public class SmartArray {
             }
         }
         return false;
+    }
+
+    public void forEach(Consumer<Integer> consumer) {
+        for (int i = 0; i < this.size; i++) {
+            consumer.accept(this.data[i]);
+        }
     }
 
     private void checkIfNeedToResize() {
