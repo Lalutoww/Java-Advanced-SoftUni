@@ -7,6 +7,10 @@ public class Main {
         }
 
         smartArray.add(2, 5);
+        System.out.println(smartArray.contains(5));
+        System.out.println(smartArray.remove(2));
+        System.out.println(smartArray.contains(3));
+        System.out.println(smartArray.contains(5));
 
         System.out.println();
     }

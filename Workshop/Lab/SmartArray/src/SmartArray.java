@@ -95,6 +95,21 @@ public class SmartArray {
         return removedElement;
     }
 
+    /**
+     * Returns {@code true} if this list contains the specified element.
+     *
+     * @param element element whose presence in this list is to be tested
+     * @return {@code true} if this list contains the specified element, otherwise {@code false}
+     */
+    public boolean contains(int element) {
+        for (int i = 0; i < this.size; i++) {
+            if (this.data[i] == element) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void checkIfNeedToResize() {
         if (this.size == this.capacity) {
             this.resize();
