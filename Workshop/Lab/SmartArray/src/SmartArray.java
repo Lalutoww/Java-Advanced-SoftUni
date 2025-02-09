@@ -1,6 +1,6 @@
 import java.util.function.Consumer;
 
-public class SmartArray {
+public class SmartArray<T> {
     /**
      * Default initial capacity.
      */
@@ -11,7 +11,7 @@ public class SmartArray {
      */
     private static final int DEFAULT_SIZE = 0;
 
-    private int[] data;
+    private T[] data;
     private int size;
     private int capacity;
 
@@ -21,8 +21,9 @@ public class SmartArray {
      * <p>
      * This SmartArray is based on a normal Array
      */
+    @SuppressWarnings("unchecked")
     public SmartArray() {
-        this.data = new int[DEFAULT_CAPACITY];
+        this.data = (T[]) new Object[DEFAULT_CAPACITY];
         this.size = DEFAULT_SIZE;
         this.capacity = DEFAULT_CAPACITY;
     }
@@ -33,7 +34,7 @@ public class SmartArray {
      * @param element element to be appended to this list
      * @throws IndexOutOfBoundsException – if the index is out of range {@code (index < 0 || index >= size())}
      */
-    public void add(int element) {
+    public void add(T element) {
         checkIfNeedToResize();
         this.data[size] = element;
         size++;
@@ -48,11 +49,11 @@ public class SmartArray {
      * @param element element to be inserted
      * @throws IndexOutOfBoundsException – if the index is out of range {@code (index < 0 || index >= size())}
      */
-    public void add(int index, int element) {
+    public void add(int index, T element) {
         this.checkIndex(index);
 
         if (index == this.size - 1) {
-            int oldElement = this.data[this.size - 1];
+            T oldElement = this.data[this.size - 1];
             this.add(oldElement);
             this.data[this.size - 2] = element;
         } else {
@@ -70,7 +71,7 @@ public class SmartArray {
      * @return the element at the specified position in this list
      * @throws IndexOutOfBoundsException – if the index is out of range {@code (index < 0 || index >= size())}
      */
-    public int get(int index) {
+    public T get(int index) {
         this.checkIndex(index);
 
         return this.data[index];
@@ -85,9 +86,9 @@ public class SmartArray {
      * @return the element that was removed from the list
      * @throws IndexOutOfBoundsException – if the index is out of range {@code (index < 0 || index >= size())}
      */
-    public int remove(int index) {
+    public T remove(int index) {
         this.checkIndex(index);
-        int removedElement = this.get(index);
+        T removedElement = this.get(index);
         shiftLeft(index);
         size--;
 
@@ -105,19 +106,22 @@ public class SmartArray {
      */
     public boolean contains(int element) {
         for (int i = 0; i < this.size; i++) {
-            if (this.data[i] == element) {
+            if (this.data[i].equals(element)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void forEach(Consumer<Integer> consumer) {
+    public void forEach(Consumer<T> consumer) {
         for (int i = 0; i < this.size; i++) {
             consumer.accept(this.data[i]);
         }
     }
 
+    /**
+     * Checks if {@code size == capacity} and if so, calls the resize function.
+     */
     private void checkIfNeedToResize() {
         if (this.size == this.capacity) {
             this.resize();
@@ -143,15 +147,13 @@ public class SmartArray {
     }
 
     /**
-     * Decrease the size and check if it is 4 times smaller than the capacity. Probably it is but is not necessarily. If its
-     * smaller, a good idea is to shrink our array, so we can free some memory. Our SmartArray will keep only integers,
-     * which makes it pretty easy with the memory consumption. However if we had to store complex objects, which
-     * would have taken a lot more memory, we would rather think about shrinking it anyway.
+     * Decreases the capacity to ensure that the array doesn't
+     * take more space than needed.
      */
-
+    @SuppressWarnings("unchecked")
     private void shrink() {
         this.capacity /= 2;
-        int[] temp = new int[this.capacity];
+        T[] temp = (T[]) new Object[DEFAULT_CAPACITY];
         System.arraycopy(this.data, 0, temp, 0, this.size);
         this.data = temp;
     }
@@ -181,9 +183,10 @@ public class SmartArray {
      * Increases the capacity to ensure that it can hold at least the
      * number of elements specified by the minimum capacity argument.
      */
+    @SuppressWarnings("unchecked")
     private void resize() {
         this.capacity *= 2;
-        int[] temp = new int[this.capacity];
+        T[] temp = (T[]) new Object[this.capacity];
         System.arraycopy(this.data, 0, temp, 0, size);
         data = temp;
     }
