@@ -52,6 +52,50 @@ public class SmartArray {
     }
 
     /**
+     * Removes the element at the specified position in this list.
+     * Shifts any subsequent elements to the left (subtracts one from their
+     * indices).
+     *
+     * @param index the index of the element to be removed
+     * @return the element that was removed from the list
+     * @throws IndexOutOfBoundsException – if the index is out of range {@code (index < 0 || index >= size())}
+     */
+    public int remove(int index) {
+        this.checkIndex(index);
+        int removedElement = this.get(index);
+        shift(index);
+        size--;
+
+        if (this.size <= this.capacity / 4) {
+            this.shrink();
+        }
+        return removedElement;
+    }
+
+    /**
+     * The shift method uses a loop, which moves all of the elements to the left, starting from a given index.
+     */
+    private void shift(int index) {
+        for (int i = index; i < this.size - 1; i++) {
+            this.data[i] = this.data[i + 1];
+        }
+    }
+
+    /**
+     * Decrease the size and check if it is 4 times smaller than the capacity. Probably it is but is not necessarily. If its
+     * smaller, a good idea is to shrink our array, so we can free some memory. Our SmartArray will keep only integers,
+     * which makes it pretty easy with the memory consumption. However if we had to store complex objects, which
+     * would have taken a lot more memory, we would rather think about shrinking it anyway.
+     */
+
+    private void shrink() {
+        this.capacity /= 2;
+        int[] temp = new int[this.capacity];
+        System.arraycopy(this.data, 0, temp, 0, this.size);
+        this.data = temp;
+    }
+
+    /**
      * Checks if the {@code index} is within the bounds of the range from
      * {@code 0} (inclusive) to {@code length} (exclusive).
      *
@@ -79,7 +123,7 @@ public class SmartArray {
     private void resize() {
         this.capacity *= 2;
         int[] temp = new int[this.capacity];
-        System.arraycopy(this.data, 0, temp, 0, data.length);
+        System.arraycopy(this.data, 0, temp, 0, size);
         data = temp;
     }
 }

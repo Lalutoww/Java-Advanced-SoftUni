@@ -2,14 +2,14 @@ public class Main {
     public static void main(String[] args) {
         SmartArray smartArray = new SmartArray();
 
-        smartArray.add(0);
-        smartArray.add(1);
-        smartArray.add(2);
-        smartArray.add(3);
-        smartArray.add(4);
-        smartArray.add(5);
+        for (int i = 0; i < 5; i++) {
+            smartArray.add(i);
+        }
 
-        System.out.println(smartArray.get(4));
-        System.out.println(smartArray.get(5));
+        System.out.println(smartArray.remove(1));
+        System.out.println(smartArray.remove(2));
+
+
+        System.out.println();
     }
 }
