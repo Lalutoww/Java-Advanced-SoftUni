@@ -29,13 +29,36 @@ public class SmartArray {
      * Appends the specified element to the end of this list.
      *
      * @param element element to be appended to this list
+     * @throws IndexOutOfBoundsException – if the index is out of range {@code (index < 0 || index >= size())}
      */
     public void add(int element) {
-        if (this.size == this.capacity) {
-            this.resize();
-        }
+        checkIfNeedToResize();
         this.data[size] = element;
         size++;
+    }
+
+    /**
+     * Inserts the specified element at the specified position in this
+     * list. Shifts the element currently at that position (if any) and
+     * any subsequent elements to the right (adds one to their indices).
+     *
+     * @param index   index at which the specified element is to be inserted
+     * @param element element to be inserted
+     * @throws IndexOutOfBoundsException – if the index is out of range {@code (index < 0 || index >= size())}
+     */
+    public void add(int index, int element) {
+        this.checkIndex(index);
+
+        if (index == this.size - 1) {
+            int oldElement = this.data[this.size - 1];
+            this.add(oldElement);
+            this.data[this.size - 2] = element;
+        } else {
+            checkIfNeedToResize();
+            this.size++;
+            this.shiftRight(index);
+            this.data[index] = element;
+        }
     }
 
     /**
@@ -63,7 +86,7 @@ public class SmartArray {
     public int remove(int index) {
         this.checkIndex(index);
         int removedElement = this.get(index);
-        shift(index);
+        shiftLeft(index);
         size--;
 
         if (this.size <= this.capacity / 4) {
@@ -72,12 +95,27 @@ public class SmartArray {
         return removedElement;
     }
 
+    private void checkIfNeedToResize() {
+        if (this.size == this.capacity) {
+            this.resize();
+        }
+    }
+
     /**
      * The shift method uses a loop, which moves all of the elements to the left, starting from a given index.
      */
-    private void shift(int index) {
+    private void shiftLeft(int index) {
         for (int i = index; i < this.size - 1; i++) {
             this.data[i] = this.data[i + 1];
+        }
+    }
+
+    /**
+     * The shift method uses a loop, which moves all of the elements to the right, starting from a given index.
+     */
+    private void shiftRight(int index) {
+        for (int i = this.size - 1; i > index; i--) {
+            this.data[i] = this.data[i - 1];
         }
     }
 
