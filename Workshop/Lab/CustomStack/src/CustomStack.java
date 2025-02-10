@@ -1,6 +1,12 @@
 public class CustomStack {
+    /**
+     * initial stack capacity.
+     */
     private static final int DEFAULT_CAPACITY = 4;
 
+    /**
+     * initial stack size.
+     */
     private static final int DEFAULT_SIZE = 0;
 
     private int[] data;
@@ -27,9 +33,28 @@ public class CustomStack {
         size++;
     }
 
+    public int pop() {
+        int removedElement = this.data[size - 1];
+        size--;
+
+        if (capacity / 4 > size) {
+            this.shrink();
+        }
+        return removedElement;
+    }
+
+    /**
+     * Decreases the capacity of this stack by 2 each time {@code capacity / 4 > size}.
+     */
+    private void shrink() {
+        this.capacity /= 2;
+        int[] temp = new int[this.capacity];
+        System.arraycopy(this.data, 0, temp, 0, size);
+        this.data = temp;
+    }
+
     /**
      * Increases the capacity of this stack by 2 each time {@code size == capacity}.
-     *
      */
     private void resize() {
         this.capacity *= 2;
