@@ -21,7 +21,18 @@ public class DoublyLinkedList {
         }
         this.size++;
     }
-    
+
+    public void addLast(int element) {
+        Node newNode = new Node(element);
+        if (isEmpty()) {
+            addFirst(element);
+        } else {
+            this.tail.setNextElement(newNode);
+            newNode.setPrevElement(this.tail);
+            this.tail = newNode;
+        }
+        this.size++;
+    }
 
     private boolean isEmpty() {
         return this.size == 0;

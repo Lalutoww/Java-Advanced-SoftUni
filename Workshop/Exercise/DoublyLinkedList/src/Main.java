@@ -4,5 +4,6 @@ public class Main {
 
         linkedList.addFirst(2);
         linkedList.addFirst(1);
+        linkedList.addLast(3);
     }
 }
