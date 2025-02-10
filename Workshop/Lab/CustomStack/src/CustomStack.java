@@ -2,7 +2,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
-public class CustomStack implements Iterable<Integer> {
+public class CustomStack<T> implements Iterable<T> {
     /**
      * initial stack capacity.
      */
@@ -13,14 +13,15 @@ public class CustomStack implements Iterable<Integer> {
      */
     private static final int DEFAULT_SIZE = 0;
 
-    private int[] data;
+    private T[] data;
     private int size;
     private int capacity;
 
+    @SuppressWarnings("unchecked")
     public CustomStack() {
         this.size = DEFAULT_SIZE;
         this.capacity = DEFAULT_CAPACITY;
-        this.data = new int[DEFAULT_CAPACITY];
+        this.data = (T[]) new Object[DEFAULT_CAPACITY];
     }
 
     /**
@@ -28,7 +29,7 @@ public class CustomStack implements Iterable<Integer> {
      *
      * @param element the element to add
      */
-    public void push(int element) {
+    public void push(T element) {
         if (size >= capacity) {
             this.resize();
         }
@@ -37,9 +38,9 @@ public class CustomStack implements Iterable<Integer> {
         size++;
     }
 
-    public int pop() {
+    public T pop() {
         this.checkIfEmpty();
-        int removedElement = this.data[size - 1];
+        T removedElement = this.data[size - 1];
         size--;
 
         if (capacity / 4 > size) {
@@ -55,27 +56,14 @@ public class CustomStack implements Iterable<Integer> {
      * @return the last element represented by this stack
      * @throws NoSuchElementException if there are no elements in the stack
      */
-    public int peek() {
+    public T peek() {
         this.checkIfEmpty();
         return this.data[size - 1];
     }
 
 
-    /**
-     * Performs the given action for each element of the {@code Iterable}
-     * until all elements have been processed.
-     * @implSpec
-     * <p>The default implementation behaves as if:
-     * <pre>{@code
-     *     for (Integer e : this.data)
-     *         action.accept(e);
-     * }</pre>
-     *
-     * @param consumer The action to be performed for each element
-     */
-    @Override
-    public void forEach(Consumer<? super Integer> consumer) {
-        for (int i = 0; i < this.size; i++) {
+    public void forEach(Consumer<? super T> consumer) {
+        for (int i = this.size - 1; i >= 0; i--) {
             consumer.accept(this.data[i]);
         }
     }
@@ -95,9 +83,10 @@ public class CustomStack implements Iterable<Integer> {
     /**
      * Decreases the capacity of this stack by 2 each time {@code capacity / 4 > size}.
      */
+    @SuppressWarnings("unchecked")
     private void shrink() {
         this.capacity /= 2;
-        int[] temp = new int[this.capacity];
+        T[] temp = (T[]) new Object[this.capacity];
         System.arraycopy(this.data, 0, temp, 0, size);
         this.data = temp;
     }
@@ -105,9 +94,10 @@ public class CustomStack implements Iterable<Integer> {
     /**
      * Increases the capacity of this stack by 2 each time {@code size == capacity}.
      */
+    @SuppressWarnings("unchecked")
     private void resize() {
         this.capacity *= 2;
-        int[] temp = new int[this.capacity];
+        T[] temp = (T[]) new Object[this.capacity];
         System.arraycopy(this.data, 0, temp, 0, size);
         this.data = temp;
     }
@@ -120,14 +110,14 @@ public class CustomStack implements Iterable<Integer> {
      * @return an iterator over the elements in this stack
      */
     @Override
-    public Iterator<Integer> iterator() {
+    public Iterator<T> iterator() {
         return new CustomStackIterator();
     }
 
     /**
      * Helper class which implements the logic of {@link #iterator}
      */
-    private class CustomStackIterator implements Iterator<Integer> {
+    private class CustomStackIterator implements Iterator<T> {
         /**
          * Used to set boundaries, and find the current element
          */
@@ -150,7 +140,7 @@ public class CustomStack implements Iterable<Integer> {
          * @return the next element of the stack
          */
         @Override
-        public Integer next() {
+        public T next() {
             return data[--iterableSize];
         }
     }

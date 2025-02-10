@@ -1,38 +1,31 @@
 public class Main {
     public static void main(String[] args) {
-        CustomStack customStack = new CustomStack();
+        CustomStack<Integer> customStackOfIntegers = new CustomStack<>();
 
-        customStack.push(1);
-        customStack.push(2);
-        customStack.push(3);
-        customStack.push(4);
-        customStack.push(5);
-        customStack.push(6);
-        customStack.push(7);
+        customStackOfIntegers.push(1);
+        customStackOfIntegers.push(2);
+        customStackOfIntegers.push(3);
 
-        System.out.println("Peek: " + customStack.peek());
-        System.out.println("Removed: " + customStack.pop());
-        System.out.println("Peek: " + customStack.peek());
+        System.out.println("Peek: " + customStackOfIntegers.peek());
+        System.out.println("Removed: " + customStackOfIntegers.pop());
+        System.out.println("Peek: " + customStackOfIntegers.peek());
 
-        System.out.println("Removed: " + customStack.pop());
-        System.out.println("Peek: " + customStack.peek());
-        System.out.println("Removed: " + customStack.pop());
-        System.out.println("Peek: " + customStack.peek());
-
-        for (Integer integer : customStack) {
+        for (Integer integer : customStackOfIntegers) {
             System.out.println(integer);
         }
 
-        System.out.println("Peek: " + customStack.peek());
+        System.out.println("Peek: " + customStackOfIntegers.peek());
 
-        System.out.println("Removed: " + customStack.pop());
-        System.out.println();
-        System.out.println("Removed: " + customStack.pop());
+        customStackOfIntegers.forEach(x -> System.out.println(x + " -> " + x * 2));
 
-        for (Integer integer : customStack) {
-            System.out.println(integer);
-        }
+        CustomStack<String> customStackOfStrings = new CustomStack<>();
+        customStackOfStrings.push("!");
+        customStackOfStrings.push("thank you for checking out my custom stack");
+        customStackOfStrings.push("Hello World");
 
-        customStack.forEach(x -> System.out.println(x + " -> " + x * 2));
+        customStackOfStrings.pop();
+        customStackOfStrings.push("Hello user,");
+
+        customStackOfStrings.forEach(x -> System.out.print(x + " "));
     }
 }
