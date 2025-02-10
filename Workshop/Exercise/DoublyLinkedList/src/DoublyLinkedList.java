@@ -1,4 +1,5 @@
 import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
 public class DoublyLinkedList {
     private Node head;
@@ -89,6 +90,14 @@ public class DoublyLinkedList {
             }
             this.size--;
             return removedNode;
+        }
+    }
+
+    public void forEach(Consumer<Integer> consumer) {
+        Node currentNode = this.head;
+        while (currentNode != null) {
+            consumer.accept(currentNode.getValue());
+            currentNode = currentNode.getNextElement();
         }
     }
 
