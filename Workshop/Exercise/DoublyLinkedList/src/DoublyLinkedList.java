@@ -9,6 +9,30 @@ public class DoublyLinkedList {
         this.size = 0;
     }
 
+    public int get(int index) {
+        checkIndex(index);
+        if (index == 0) {
+            return this.head.getValue();
+        } else if (index == size - 1) {
+            return this.tail.getValue();
+        }
+
+        Node currentNode = null;
+        if (index <= size / 2) {
+            currentNode = this.head;
+            for (int i = 0; i < index; i++) {
+                currentNode = currentNode.getNextElement();
+            }
+        } else {
+            for (int i = size - 1; i > index; i--) {
+                currentNode = this.tail;
+                currentNode = currentNode.getPrevElement();
+            }
+        }
+
+        return currentNode.getValue();
+    }
+
     public void addFirst(int element) {
         Node newNode = new Node(element);
         if (isEmpty()) {
@@ -32,6 +56,12 @@ public class DoublyLinkedList {
             this.tail = newNode;
         }
         this.size++;
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= this.size) {
+            throw new IndexOutOfBoundsException(String.format("Index %d is out of bounds.", index));
+        }
     }
 
     private boolean isEmpty() {
