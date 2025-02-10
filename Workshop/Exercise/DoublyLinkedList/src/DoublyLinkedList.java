@@ -9,4 +9,22 @@ public class DoublyLinkedList {
         this.size = 0;
     }
 
+    public void addFirst(int element) {
+        Node newNode = new Node(element);
+        if (isEmpty()) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.head.setPrevElement(newNode);
+            newNode.setNextElement(this.head);
+            this.head = newNode;
+        }
+        this.size++;
+    }
+    
+
+    private boolean isEmpty() {
+        return this.size == 0;
+    }
+
 }
