@@ -1,6 +1,7 @@
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class CustomStack {
+public class CustomStack implements Iterable<Integer> {
     /**
      * initial stack capacity.
      */
@@ -88,5 +89,48 @@ public class CustomStack {
         int[] temp = new int[this.capacity];
         System.arraycopy(this.data, 0, temp, 0, size);
         this.data = temp;
+    }
+
+    /**
+     * Returns an iterator over the elements in this deque.  The elements
+     * will be ordered from the last to the first (LIFO)  This is the same
+     * as elements being  peeked {@link #peek} or popped (via successive calls to {@link #pop}).
+     *
+     * @return an iterator over the elements in this stack
+     */
+    @Override
+    public Iterator<Integer> iterator() {
+        return new CustomStackIterator();
+    }
+
+    /**
+     * Helper class which implements the logic of {@link #iterator}
+     */
+    private class CustomStackIterator implements Iterator<Integer> {
+        /**
+         * Used to set boundaries, and find the current element
+         */
+        int index = 0;
+
+        /**
+         * Uses {@code iterableSize} instead of {@code size} to ensure that even after iterating over the stack, we can still access the elements
+         */
+        int iterableSize = size;
+
+        /**
+         * checks if there are still elements present in the stack
+         */
+        @Override
+        public boolean hasNext() {
+            return iterableSize - 1 >= index;
+        }
+
+        /**
+         * @return the next element of the stack
+         */
+        @Override
+        public Integer next() {
+            return data[--iterableSize];
+        }
     }
 }
