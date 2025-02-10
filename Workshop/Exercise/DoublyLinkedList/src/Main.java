@@ -14,5 +14,11 @@ public class Main {
         linkedList.addLast(6);
         //Expected result - 2 4 6
         linkedList.forEach(x -> System.out.print(x + " "));
+
+        int[] nodes = linkedList.toArray();
+        System.out.println("\nNODES IN ARRAY PRINT:");
+        for (int node : nodes) {
+            System.out.print(node + " ");
+        }
     }
 }

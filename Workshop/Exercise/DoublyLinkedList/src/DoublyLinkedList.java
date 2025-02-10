@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
@@ -99,6 +101,12 @@ public class DoublyLinkedList {
             consumer.accept(currentNode.getValue());
             currentNode = currentNode.getNextElement();
         }
+    }
+
+    public int[] toArray() {
+        List<Integer> nodeList = new ArrayList<>();
+        forEach(nodeList::add);
+        return nodeList.stream().mapToInt(Integer::intValue).toArray();
     }
 
     private void checkIndex(int index) {
