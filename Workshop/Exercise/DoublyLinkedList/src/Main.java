@@ -1,6 +1,9 @@
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        DoublyLinkedList linkedList = new DoublyLinkedList();
+        System.out.println("\n=======INTEGER DEMO=======");
+        DoublyLinkedList<Integer> linkedList = new DoublyLinkedList<>();
 
         linkedList.addFirst(1);
         linkedList.addFirst(2);
@@ -15,9 +18,31 @@ public class Main {
         //Expected result - 2 4 6
         linkedList.forEach(x -> System.out.print(x + " "));
 
-        int[] nodes = linkedList.toArray();
-        System.out.println("\nNODES IN ARRAY PRINT:");
+        List<Integer> nodes = linkedList.toList();
+        System.out.println("\nNODES IN LIST PRINT:");
         for (int node : nodes) {
+            System.out.print(node + " ");
+        }
+
+        System.out.println("\n=======STRING DEMO=======");
+        DoublyLinkedList<String> linkedListOfStrings = new DoublyLinkedList<>();
+
+        linkedListOfStrings.addFirst("one");
+        linkedListOfStrings.addFirst("two");
+        linkedListOfStrings.addFirst("three");
+
+        System.out.println("REMOVE FIRST (expected - three): " + linkedListOfStrings.removeFirst());
+        System.out.println("REMOVE LAST (expected - one): " + linkedListOfStrings.removeLast());
+        System.out.println("GET ELEMENT AT INDEX 0 (expected - two): " + linkedListOfStrings.get(0));
+
+        linkedListOfStrings.addLast("four");
+        linkedListOfStrings.addLast("six");
+        //Expected result - two four six
+        linkedListOfStrings.forEach(x -> System.out.print(x + " "));
+
+        List<String> nodesOfStrings = linkedListOfStrings.toList();
+        System.out.println("\nNODES IN LIST PRINT:");
+        for (String node : nodesOfStrings) {
             System.out.print(node + " ");
         }
     }

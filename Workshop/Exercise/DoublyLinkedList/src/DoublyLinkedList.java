@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
-public class DoublyLinkedList {
-    private Node head;
-    private Node tail;
+public class DoublyLinkedList<T> {
+    private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     public DoublyLinkedList() {
@@ -14,8 +14,8 @@ public class DoublyLinkedList {
         this.size = 0;
     }
 
-    public void addFirst(int element) {
-        Node newNode = new Node(element);
+    public void addFirst(T element) {
+        Node<T> newNode = new Node<>(element);
         if (isEmpty()) {
             this.head = newNode;
             this.tail = newNode;
@@ -27,8 +27,8 @@ public class DoublyLinkedList {
         this.size++;
     }
 
-    public void addLast(int element) {
-        Node newNode = new Node(element);
+    public void addLast(T element) {
+        Node<T> newNode = new Node<>(element);
         if (isEmpty()) {
             addFirst(element);
         } else {
@@ -39,7 +39,7 @@ public class DoublyLinkedList {
         this.size++;
     }
 
-    public int get(int index) {
+    public T get(int index) {
         checkIndex(index);
         if (index == 0) {
             return this.head.getValue();
@@ -47,7 +47,7 @@ public class DoublyLinkedList {
             return this.tail.getValue();
         }
 
-        Node currentNode = null;
+        Node<T> currentNode = null;
         if (index <= size / 2) {
             currentNode = this.head;
             for (int i = 0; i < index; i++) {
@@ -60,14 +60,15 @@ public class DoublyLinkedList {
             }
         }
 
+        assert currentNode != null;
         return currentNode.getValue();
     }
 
-    public int removeFirst() {
+    public T removeFirst() {
         if (isEmpty()) {
             throw new NoSuchElementException("The list is empty");
         } else {
-            int removedNode = this.head.getValue();
+            T removedNode = this.head.getValue();
             this.head = this.head.getNextElement();
             if (this.head == null) {
                 this.tail = null;
@@ -79,11 +80,11 @@ public class DoublyLinkedList {
         }
     }
 
-    public int removeLast() {
+    public T removeLast() {
         if (isEmpty()) {
             throw new NoSuchElementException("The list is empty");
         } else {
-            int removedNode = this.tail.getValue();
+            T removedNode = this.tail.getValue();
             this.tail = this.tail.getPrevElement();
             if (this.tail == null) {
                 this.head = null;
@@ -95,18 +96,18 @@ public class DoublyLinkedList {
         }
     }
 
-    public void forEach(Consumer<Integer> consumer) {
-        Node currentNode = this.head;
+    public void forEach(Consumer<T> consumer) {
+        Node<T> currentNode = this.head;
         while (currentNode != null) {
             consumer.accept(currentNode.getValue());
             currentNode = currentNode.getNextElement();
         }
     }
 
-    public int[] toArray() {
-        List<Integer> nodeList = new ArrayList<>();
+    public List<T> toList() {
+        List<T> nodeList = new ArrayList<>();
         forEach(nodeList::add);
-        return nodeList.stream().mapToInt(Integer::intValue).toArray();
+        return nodeList;
     }
 
     private void checkIndex(int index) {
