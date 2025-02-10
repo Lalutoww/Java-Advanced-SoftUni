@@ -76,6 +76,22 @@ public class DoublyLinkedList {
         }
     }
 
+    public int removeLast() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("The list is empty");
+        } else {
+            int removedNode = this.tail.getValue();
+            this.tail = this.tail.getPrevElement();
+            if (this.tail == null) {
+                this.head = null;
+            } else {
+                this.tail.setNextElement(null);
+            }
+            this.size--;
+            return removedNode;
+        }
+    }
+
     private void checkIndex(int index) {
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException(String.format("Index %d is out of bounds.", index));
