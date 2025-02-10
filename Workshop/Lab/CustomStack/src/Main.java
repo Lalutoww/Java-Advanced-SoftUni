@@ -32,5 +32,7 @@ public class Main {
         for (Integer integer : customStack) {
             System.out.println(integer);
         }
+
+        customStack.forEach(x -> System.out.println(x + " -> " + x * 2));
     }
 }

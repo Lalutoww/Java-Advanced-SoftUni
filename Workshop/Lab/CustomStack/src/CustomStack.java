@@ -1,5 +1,6 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
 public class CustomStack implements Iterable<Integer> {
     /**
@@ -57,6 +58,26 @@ public class CustomStack implements Iterable<Integer> {
     public int peek() {
         this.checkIfEmpty();
         return this.data[size - 1];
+    }
+
+
+    /**
+     * Performs the given action for each element of the {@code Iterable}
+     * until all elements have been processed.
+     * @implSpec
+     * <p>The default implementation behaves as if:
+     * <pre>{@code
+     *     for (Integer e : this.data)
+     *         action.accept(e);
+     * }</pre>
+     *
+     * @param consumer The action to be performed for each element
+     */
+    @Override
+    public void forEach(Consumer<? super Integer> consumer) {
+        for (int i = 0; i < this.size; i++) {
+            consumer.accept(this.data[i]);
+        }
     }
 
     /**
