@@ -14,12 +14,12 @@ public class Main {
         customStack.push(8);
         customStack.push(9);
 
-        System.out.println(customStack.pop());
-        System.out.println(customStack.pop());
-        System.out.println(customStack.pop());
-        System.out.println(customStack.pop());
-        System.out.println(customStack.pop());
-        System.out.println(customStack.pop());
+        System.out.println(customStack.peek());
+        System.out.println(customStack.peek());
+
+        customStack.pop();
+        customStack.pop();
+        System.out.println(customStack.peek());
 
 
         System.out.println();

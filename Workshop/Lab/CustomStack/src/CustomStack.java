@@ -43,6 +43,12 @@ public class CustomStack {
         return removedElement;
     }
 
+    public int peek() {
+        return this.data[size - 1];
+    }
+
+    //foreach(Consumer)
+
     /**
      * Decreases the capacity of this stack by 2 each time {@code capacity / 4 > size}.
      */
